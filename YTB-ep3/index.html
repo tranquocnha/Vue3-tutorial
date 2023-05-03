@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 150px;
+        height: 80px;
+        background: #dedede;
+        margin-bottom: 25px;
+      }
+      .card-products {
+        display: flex;
+        flex-direction: row;
+        margin-top: 150px;
+      }
+      .card .card-thumb {
+        width: 150px;
+        height: auto;
+      }
+      .cart {
+        background: coral;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello vue.js</h1>
+    <section id="contact">
+      <div class="card-container">
+        <div class="card" @mouseover="onLogEvent">Mouse over (enter)</div>
+        <div class="card" @mouseleave="onLogEvent">Mouse leave</div>
+        <div class="card" @dblclick="onLogEvent($event,150,80)">
+          Double Click
+        </div>
+        <div class="card" @mousemove="onMouseMoveEvent">
+          Mouse Move : {{ `${X}-${Y}` }}
+        </div>
+        <div class="card-products card-container" :class="classTesting">
+          <div
+            class="card"
+            v-for="product in productsComputed"
+            :class="{ cart: product.isCart}"
+            @dblclick="onToggleCart($event,product)"
+          >
+            <!-- :style="{background: product.isCart ? 'coral' : '#fff' }" -->
+            <img class="card-thumb" :src="product.thumb" alt="" />
+            <h3>{{product.name}}</h3>
+            <p>{{product.price}}</p>
+          </div>
+        </div>
+      </div>
+      <!-- code here-->
+    </section>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
