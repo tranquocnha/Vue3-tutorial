@@ -17,7 +17,21 @@
 import { watch, computed, ref, reactive, watchEffect } from "vue";
 
 export default {
-  setup() {
+  props: {
+    theme: {
+      type: String,
+      required: false,
+      default: "light",
+    },
+  },
+  setup(
+    //props
+    { theme },
+    //context
+    { emit }
+  ) {
+    console.log(theme);
+    console.log(emit);
     const firstName = ref("nhatq");
     const searchText = ref("");
     const customers = reactive(["SomeThing", "Sky albert", "VueJS", "Angular"]);
@@ -63,7 +77,7 @@ export default {
     //     someThing: "Hu",
     //   };
 
-    //   car.set = {
+    //   car = {
     //     price: 200000,
     //     name: "HonDa",
     //   };
