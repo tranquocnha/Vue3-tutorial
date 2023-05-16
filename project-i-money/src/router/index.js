@@ -1,4 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { projectAuth } from "../config/firebase";
+
+//Authu Guards
+const requireAuth = (next) => {
+  const user = projectAuth.currentUser;
+
+  if (!user) {
+    next({ name: "Login", params: {} });
+  } else {
+    next();
+  }
+};
 
 const routes = [
   {
@@ -26,6 +38,12 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: () => import("../views/profile.vue"),
+    beforeEnter: requireAuth,
+  },
+  {
+    path: "/logout",
+    name: "Logout",
+    component: () => import("../views/logout.vue"),
   },
 ];
 
