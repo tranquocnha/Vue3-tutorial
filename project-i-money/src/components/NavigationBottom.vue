@@ -12,36 +12,51 @@
         </li>
       </ul>
     </div>
+    <div data-circle class="top-0 absolute left-1/2 transform -translate-x-1/2">
+      <div
+        data-circle-inset
+        class="flex items-center justify-center bg-primary text-white -top-6 rounded-full w-12 h-12 cursor-pointer absolute left-1/2 transform -translate-x-1/2"
+        @click="goToRoute()"
+      >
+        <i class="t2ico t2ico-plus"></i>
+      </div>
+    </div>
   </footer>
 </template>
 
 <script>
+import { NAV_BOTTOM_ITEMS } from "../constants/index";
+import { useRouter } from "vue-router";
 import { reactive } from "vue";
+
 export default {
   setup() {
-    const navItems = reactive([
-      {
-        icon: "t2ico-category",
-        text: "Home",
-        name: "Home",
-      },
-      {
-        icon: "t2ico-chart",
-        text: "Report",
-        name: "Home",
-      },
-      {
-        icon: "t2ico-presentation",
-        text: "Budget",
-        name: "Home",
-      },
-      {
-        icon: "t2ico-profile",
-        text: "Profile",
-        name: "Profile",
-      },
-    ]);
-    return { navItems };
+    const router = useRouter();
+    const navItems = reactive(NAV_BOTTOM_ITEMS);
+    function goToRoute() {
+      router.push({ name: "NewTransaction", params: {} });
+    }
+    return {
+      navItems,
+      goToRoute,
+    };
   },
 };
 </script>
+
+<style lang="css" scoped>
+footer#footer > div[data-circle] {
+  @apply bg-dark-light;
+
+  width: 60px;
+  height: 30px;
+  border-bottom-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+}
+footer#footer ul li:nth-child(2) {
+  margin-right: 10%;
+}
+footer#footer ul li:nth-child(3) {
+  margin-left: 10%;
+}
+</style>
