@@ -1,11 +1,25 @@
 <template>
-  <form @submit.prevent="onSubmit">
-    <InputField label="Email" v-model.trim="email" />
-    <span v-if="emailError">{{ emailError }}</span>
-    <InputField type="password" label="Password" v-model.trim="password" />
-    <span v-if="passwordError">{{ passwordError }}</span>
-    <Button type="submit" primary :disabled="hasErrors">Register</Button>
-  </form>
+  <div class="w-full max-w-xs">
+    <form
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      @submit.prevent="onSubmit"
+    >
+      <div class="mb-4">
+        <InputField label="Email" v-model.trim="email" @blur="validateEmail" />
+        <span v-if="emailError">{{ emailError }}</span>
+      </div>
+      <div class="mb-6">
+        <InputField
+          type="password"
+          label="Password"
+          v-model.trim="password"
+          @blur="validatePassword"
+        />
+        <span v-if="passwordError">{{ passwordError }}</span>
+      </div>
+      <Button type="submit" primary :disabled="hasErrors">Register</Button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -28,6 +42,14 @@ export default {
   computed: {
     hasErrors() {
       return this.emailError !== "" || this.passwordError !== "";
+    },
+  },
+  watch: {
+    email() {
+      this.validateEmail();
+    },
+    password() {
+      this.validatePassword();
     },
   },
   methods: {
