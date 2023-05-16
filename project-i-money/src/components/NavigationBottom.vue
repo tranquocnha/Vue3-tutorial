@@ -25,6 +25,21 @@ export default {
         text: "Home",
         name: "Home",
       },
+      {
+        icon: "t2ico-chart",
+        text: "Report",
+        name: "Home",
+      },
+      {
+        icon: "t2ico-presentation",
+        text: "Budget",
+        name: "Home",
+      },
+      {
+        icon: "t2ico-profile",
+        text: "Profile",
+        name: "Profile",
+      },
     ]);
     return { navItems };
   },
