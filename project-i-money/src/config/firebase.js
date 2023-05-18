@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore/lite";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -15,7 +16,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const projectFirestore = getFirestore(app);
+const projectStorage = getStorage(app);
 const projectAuth = getAuth(app);
 
 // Get a list of cities from your database
-export { projectFirestore, projectAuth };
+export { projectFirestore, projectAuth, projectStorage };

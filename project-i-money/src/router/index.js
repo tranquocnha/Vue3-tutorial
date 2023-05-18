@@ -15,6 +15,7 @@ const routes = [
     meta: {
       text: "Hey, NhaTQ",
       leading: true,
+      isShowFooter: true,
     },
     component: () => import("../views/index.vue"),
     beforeEnter: requireAuth,
@@ -40,7 +41,7 @@ const routes = [
     name: "Profile",
     meta: {
       text: "Profile",
-      leading: true,
+      leading: false,
       isShowFooter: true,
     },
     component: () => import("../views/profile.vue"),
@@ -56,7 +57,7 @@ const routes = [
     name: "Report",
     meta: {
       text: "Report",
-      leading: true,
+      leading: false,
       isShowFooter: true,
     },
     component: () => import("../views/report.vue"),
@@ -66,7 +67,7 @@ const routes = [
     name: "Budget",
     meta: {
       text: "Budget",
-      leading: true,
+      leading: false,
       isShowFooter: true,
     },
     component: () => import("../views/budget.vue"),
@@ -76,7 +77,7 @@ const routes = [
     name: "NewTransaction",
     meta: {
       text: "New Transaction",
-      leading: true,
+      leading: false,
       isShowFooter: false,
     },
     component: () => import("../views/new-transaction.vue"),
