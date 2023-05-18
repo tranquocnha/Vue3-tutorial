@@ -19,17 +19,28 @@
       </div>
       <Button type="submit" primary :disabled="hasErrors">Register</Button>
     </form>
+    <modal
+      title="Done Login"
+      :isOpen="isShowModal"
+      @close="isShowModal = false"
+    >
+      <template v-slot:context>
+        {{ "Ban đã login thanh cong voi email :" + email }}
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
 import Button from "../components/Button.vue";
 import InputField from "../components/InputField.vue";
+import Modal from "../components/Modal.vue";
 
 export default {
   components: {
     Button,
     InputField,
+    Modal,
   },
   data() {
     return {
@@ -37,6 +48,7 @@ export default {
       password: "",
       emailError: "",
       passwordError: "",
+      isShowModal: false,
     };
   },
   computed: {
@@ -54,7 +66,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      alert(`Registering ${this.email} with password ${this.password}`);
+      this.isShowModal = !this.isShowModal;
     },
     validateEmail() {
       if (!this.email) {
