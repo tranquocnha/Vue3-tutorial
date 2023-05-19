@@ -60,26 +60,58 @@ export default {
 </script>
 
 <template>
-  <div class="w-full max-w-xs">
-    <form
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-      @submit.prevent="onSubmit"
-    >
-      <div class="mb-4">
-        <InputField label="Email" v-model.trim="email" @blur="validateEmail" />
-        <span v-if="emailError">{{ emailError }}</span>
+  <div class="mt-8">
+    <div class="container mx-auto px-8">
+      <!-- Start: From -->
+      <form class="flex flex-col space-y-6" @submit.prevent="onSubmit">
+        <div class="row">
+          <label class="flex flex-col" for="email">
+            <InputField
+              id="email"
+              class="px-4 py-3 rounded-lg border border-gray-100 mt-1"
+              autocomplete="username"
+              label="Email"
+              v-model.trim="email"
+              @blur="validateEmail"
+            />
+          </label>
+          <span v-if="emailError">{{ emailError }}</span>
+        </div>
+        <div class="row">
+          <label class="flex flex-col" for="password">
+            <InputField
+              id="password"
+              type="password"
+              class="px-4 py-3 rounded-lg border border-gray-100 mt-1"
+              label="Password"
+              v-model.trim="password"
+              @blur="validatePassword"
+            />
+          </label>
+          <span v-if="passwordError">{{ passwordError }}</span>
+        </div>
+        <div class="row">
+          <Button
+            type="submit"
+            class="py-3 text-center w-full bg-primary text-white font-bold rounded-lg"
+          >
+            Sign In
+          </Button>
+          >
+        </div>
+      </form>
+
+      <!-- Start: Direction -->
+      <div class="w-full text-center mt-6">
+        <span class="font-semibold">I'm a new user.</span>
+        <span class="ml-1">
+          <router-link
+            :to="{ name: 'Register', params: {} }"
+            class="text-primary font-bold"
+            >Sign Up</router-link
+          >
+        </span>
       </div>
-      <div class="mb-6">
-        <InputField
-          type="password"
-          label="Password"
-          v-model.trim="password"
-          @blur="validatePassword"
-        />
-        <span v-if="passwordError">{{ passwordError }}</span>
-      </div>
-      <span v-if="errorCheckLogin">{{ errorCheckLogin }}</span>
-      <Button type="submit" :disabled="hasErrors">Register</Button>
-    </form>
+    </div>
   </div>
 </template>

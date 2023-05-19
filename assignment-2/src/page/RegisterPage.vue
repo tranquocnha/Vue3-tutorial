@@ -45,9 +45,9 @@ async function onSubmit() {
       <form class="flex flex-col space-y-6" @submit.prevent="onSubmit">
         <div class="row">
           <label class="flex flex-col" for="fullName">
-            <span class="font-semibold">Full Name</span>
             <InputField
               id="fullName"
+              label="Full Name"
               class="px-4 py-3 rounded-lg border border-gray-100 mt-1"
               type="text"
               placeholder="iMoney..."
@@ -57,11 +57,11 @@ async function onSubmit() {
         </div>
         <div class="row">
           <label class="flex flex-col" for="email">
-            <span class="font-semibold">Email Address</span>
             <InputField
               id="email"
               class="px-4 py-3 rounded-lg border border-gray-100 mt-1"
               type="email"
+              label="Email Address"
               placeholder="example@gmail.com"
               autocomplete="username"
               v-model.trim="email"
@@ -72,7 +72,6 @@ async function onSubmit() {
         </div>
         <div class="row">
           <label class="flex flex-col" for="password">
-            <span class="font-semibold">Password</span>
             <InputField
               id="password"
               type="password"
