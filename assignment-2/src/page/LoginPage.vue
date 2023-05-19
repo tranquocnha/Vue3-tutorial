@@ -4,6 +4,7 @@ import Button from "../components/Button.vue";
 import MixinsCallApi from "../mixins/callApi";
 import Validate from "../mixins/validateLogin.js";
 import { useRouter } from "vue-router";
+import { ref, watch, computed } from "vue";
 
 export default {
   components: {
@@ -12,7 +13,7 @@ export default {
   },
   setup() {
     const router = useRouter();
-
+    const errorCheckLogin = ref("");
     const {
       email,
       emailError,
@@ -24,10 +25,23 @@ export default {
 
     const { checkLogin } = MixinsCallApi();
 
+    const hasErrors = computed(() => {
+      return emailError.value !== "" || passwordError.value !== "";
+    });
+
+    watch([email, password], () => {
+      validateEmail();
+      validatePassword();
+    });
+
     function onSubmit() {
-      if (checkLogin(email.value, password.value)) {
-        router.push({ name: "Register", params: {} });
-      }
+      errorCheckLogin.value = "";
+      const checkSubmit = checkLogin(email.value, password.value);
+      checkSubmit.then((result) => {
+        result[0]
+          ? router.push({ name: "Home", params: {} })
+          : (errorCheckLogin.value = "Tài khoản hoặc mật khẩu đã sai");
+      });
     }
 
     return {
@@ -38,6 +52,8 @@ export default {
       validatePassword,
       validateEmail,
       onSubmit,
+      hasErrors,
+      errorCheckLogin,
     };
   },
 };
@@ -62,7 +78,8 @@ export default {
         />
         <span v-if="passwordError">{{ passwordError }}</span>
       </div>
-      <Button type="submit">Register</Button>
+      <span v-if="errorCheckLogin">{{ errorCheckLogin }}</span>
+      <Button type="submit" :disabled="hasErrors">Register</Button>
     </form>
   </div>
 </template>

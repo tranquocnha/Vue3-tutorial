@@ -3,16 +3,10 @@ import axios from "axios";
 export default function () {
   async function checkLogin(username, password) {
     try {
-      console.log(username, password);
       const response = await axios.get(
         `http://localhost:3000/login?username=${username}&password=${password}`
       );
-      console.log("[1] checkLogin", response.data);
-      if (response.data) {
-        return true;
-      } else {
-        return false;
-      }
+      return response.data;
     } catch (error) {
       // Xử lý lỗi
       console.error(error);
@@ -28,11 +22,12 @@ export default function () {
       console.error(error);
     }
   }
-  async function register(username, password) {
+  async function register(username, password, fullName) {
     try {
-      const response = await axios.post("http://localhost:3000/register", {
+      const response = await axios.post("http://localhost:3000/login", {
         username,
         password,
+        fullName,
       });
       // Xử lý phản hồi từ máy chủ
       console.log("[3] register", response.data);
