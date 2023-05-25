@@ -1,3 +1,3 @@
 <template>
-  <h1>Home</h1>
+  <router-link :to="{ name: 'List', params: {} }">List</router-link>
 </template>

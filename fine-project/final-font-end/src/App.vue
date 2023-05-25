@@ -4,27 +4,22 @@
   </component>
 </template>
 
-<script>
+<script setup>
 import { useRoute } from "vue-router";
-import { computed } from "vue";
+import { computed, watch, ref } from "vue";
 import { PUBLIC_LAYOUT, PUBLIC_AUTH } from "./constants/index";
 
-export default {
-  setup() {
-    const route = useRoute();
-    let checkLayout = null;
-    console.log(route.meta.layout);
-    if (route.meta.layout === PUBLIC_AUTH) {
-      checkLayout = PUBLIC_AUTH;
-    } else {
-      checkLayout = PUBLIC_LAYOUT;
-    }
-    console.log(checkLayout + "-layout");
-    return {
-      layout: computed(() => checkLayout + "-layout"),
-    };
-  },
-};
+const route = useRoute();
+const checkLayout = ref("");
+watch(() => {
+  if (route.meta?.layout === PUBLIC_AUTH) {
+    checkLayout.value = PUBLIC_AUTH;
+  } else {
+    checkLayout.value = PUBLIC_LAYOUT;
+  }
+});
+
+const layout = computed(() => checkLayout.value + "-layout");
 </script>
 
 <style>
