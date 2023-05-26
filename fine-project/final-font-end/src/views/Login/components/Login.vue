@@ -48,7 +48,7 @@ const handleSubmit = () => {
       const checkSubmit = checkLogin(form.username, form.password);
       checkSubmit.then((result) => {
         result
-          ? router.push({ name: "Home", params: {} })
+          ? router.push({ name: "List", params: {} })
           : (messageLogin.value = "Tài khoản hoặc mật khẩu đã sai");
       });
       // chuyen trang den url:/

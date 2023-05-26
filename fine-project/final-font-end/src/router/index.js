@@ -2,12 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/HomeView.vue"),
-  },
-  {
     path: "/login",
     name: "Login",
     component: () =>
@@ -26,6 +20,22 @@ const routes = [
       layout: "auth",
     },
     component: () => import("../views/Admin/ListNote/index.vue"),
+  },
+  {
+    path: "/create",
+    name: "Create",
+    meta: {
+      layout: "auth",
+    },
+    component: () => import("../views/Admin/CreateNote/index.vue"),
+  },
+  {
+    path: "/update/:id",
+    name: "Update",
+    meta: {
+      layout: "auth",
+    },
+    component: () => import("../views/Admin/UpdateNote/index.vue"),
   },
 ];
 
