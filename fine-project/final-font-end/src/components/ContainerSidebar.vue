@@ -21,6 +21,13 @@
               >
             </el-menu-item>
           </el-menu-item-group>
+          <el-menu-item-group title="Đăng Xuất">
+            <el-menu-item index="1-3">
+              <router-link :to="{ name: 'Logout', params: {} }"
+                >Kích vào đây</router-link
+              >
+            </el-menu-item>
+          </el-menu-item-group>
         </el-sub-menu>
       </el-menu>
     </el-scrollbar>

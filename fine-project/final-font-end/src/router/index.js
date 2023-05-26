@@ -1,11 +1,24 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+const requireAuth = (to, from, next) => {
+  const user = localStorage.getItem("login");
+
+  if (!user) next({ name: "Login", params: {} });
+  else next();
+};
+
 const routes = [
   {
     path: "/login",
     name: "Login",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Login/index.vue"),
+  },
+  {
+    path: "/logout",
+    name: "Logout",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/logout/index.vue"),
   },
   {
     path: "/register",
@@ -19,6 +32,7 @@ const routes = [
     meta: {
       layout: "auth",
     },
+    beforeEnter: requireAuth,
     component: () => import("../views/Admin/ListNote/index.vue"),
   },
   {
@@ -27,6 +41,7 @@ const routes = [
     meta: {
       layout: "auth",
     },
+    beforeEnter: requireAuth,
     component: () => import("../views/Admin/CreateNote/index.vue"),
   },
   {
@@ -35,6 +50,7 @@ const routes = [
     meta: {
       layout: "auth",
     },
+    beforeEnter: requireAuth,
     component: () => import("../views/Admin/UpdateNote/index.vue"),
   },
 ];
