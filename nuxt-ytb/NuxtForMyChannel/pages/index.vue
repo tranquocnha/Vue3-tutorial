@@ -1,25 +1,33 @@
 <template>
-  <div id="root">
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <nuxt-link to="/">Home</nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/detail">Detail</nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/profile">Profile</nuxt-link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+  <div class="ct">
+    <div class="banner">
+      <div class="thumbnail-banner"></div>
+    </div>
+    <div class="popular-decks">
+      <h3 class="text_center my_3">3 Popular Decks For You</h3>
+      <div class="r">
+        <div class="c_4">
+          <div class="card">Deck 1</div>
+        </div>
+        <div class="c_4">
+          <div class="card">Deck 1</div>
+        </div>
+        <div class="c_4">
+          <div class="card">Deck 1</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'IndexPage',
+<style lang="scss">
+.banner {
+  height: 220px;
+  margin-top: 2rem;
+  .thumbnail-banner {
+    background: url('~assets/img/banner.jpg') center center;
+    background-size: cover;
+    height: inherit;
+  }
 }
-</script>
+</style>

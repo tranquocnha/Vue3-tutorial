@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`Components > ILayout > should render correctly 1`] = `
+"<main class=\\"layout\\">
+  <!-- @slot default Slot for default layout content -->
+</main>"
+`;
