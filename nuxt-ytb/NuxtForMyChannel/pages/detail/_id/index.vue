@@ -2,11 +2,20 @@
   <section>
     <div class="r">
       <div class="ct text_center">
-        <h3>Detail: {{ $route.params.id }} Learn English By Sky Albert</h3>
+        <h3>Detail: {{ detail.name }}</h3>
         <div class="tools">
           <button class="btn btn_success">Start Now</button>
-          <button class="btn btn_primary" @click.prevent="openModal">
+          <button
+            class="btn btn_primary"
+            @click.prevent="openModal('CreateCardModal')"
+          >
             Add a card
+          </button>
+          <button
+            class="btn btn_warning"
+            @click.prevent="openModal('DetailFromModal')"
+          >
+            Edit a card
           </button>
         </div>
         <div class="r">
@@ -63,12 +72,28 @@
 </template>
 
 <script>
-import CardList from '../../../components/Cards/CardList.vue'
+import axiox from 'axios'
+import CardList from '@/components/Cards/CardList.vue'
 
 export default {
   components: { CardList },
-  validate({ params }) {
-    return /^[0-9]$/.test(params.id)
+  // validate({ params }) {
+  //   return /^[0-9]$/.test(params.id)
+  // },
+  asyncData(context) {
+    return axiox
+      .get(
+        `https://nuxt-ytb-default-rtdb.asia-southeast1.firebasedatabase.app/details/${context.params.id}.json`
+      )
+      .then((response) => {
+        return {
+          detail: response.data,
+        }
+      })
+      .catch((e) => {
+        // eslint-disable-next-line no-console
+        console.error(e)
+      })
   },
   data() {
     return {
@@ -107,8 +132,15 @@ export default {
     }
   },
   methods: {
-    openModal() {
-      this.$modal.open({ name: 'CreateCardModal' })
+    openModal(name) {
+      if (name === 'CreateCardModal') {
+        this.$modal.open({ name: 'CreateCardModal' })
+      } else if (name === 'DetailFromModal') {
+        this.$modal.open({
+          name: 'DetailFromModal',
+          payload: { ...this.detail, id: this.$route.params.id },
+        })
+      }
     },
     closeModal() {
       this.$modal.close({ name: 'CreateCardModal' })
@@ -120,7 +152,6 @@ export default {
 <style lang="scss" scoped>
 section {
   padding-top: 3rem;
-
 }
 .modal_body {
   background-color: #ffffff;

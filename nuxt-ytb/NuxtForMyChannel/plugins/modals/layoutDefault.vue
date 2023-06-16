@@ -35,6 +35,7 @@ export default {
 
     // eslint-disable-next-line no-unused-vars
     const open = (params) => {
+      payload.value = params.payload
       visible.value = true
       // to do something
     }

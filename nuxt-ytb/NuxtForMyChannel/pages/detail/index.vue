@@ -10,7 +10,8 @@
       <ul class="detail-list">
         <detail-list
           v-for="detail in details"
-          :key="detail._id"
+          :id="detail.id"
+          :key="detail.id"
           :name="detail.name"
           :description="detail.description"
           :thumbnail="detail.thumbnail"
@@ -29,93 +30,70 @@
       > -->
     </div>
 
-    <!-- Modal -->
-    <v-modal name="CreateDetailModal">
-      <div class="modal_body">
-        <h1>Create a new Detail</h1>
-        <form action="">
-          <div class="form_group">
-            <label for="">Name: </label>
-            <input
-              class="form_control"
-              type="text"
-              placeholder="Please enter name detail"
-            />
-          </div>
-          <div class="form_group">
-            <label for="">Description: </label>
-            <textarea
-              class="form_control"
-              name=""
-              cols="30"
-              rows="10"
-              placeholder="Please enter description"
-            ></textarea>
-          </div>
-          <div class="form_group">
-            <label for="">Thumbnail: </label>
-            <input class="form_control" type="file" />
-            <div class="preview"></div>
-          </div>
-          <div class="form_group d_flex justify_content_end">
-            <button class="btn btn_danger" @click.prevent="closeModal">
-              Close
-            </button>
-            <button class="btn btn_success ml_3" @click.prevent="createDetail">
-              Create
-            </button>
-          </div>
-        </form>
-      </div>
-    </v-modal>
+
   </div>
 </template>
 
 <script>
-import DetailList from '../../components/Details/DetailList.vue'
+import DetailList from '@/components/Details/DetailList.vue'
 // import { ref } from 'vue'
 export default {
   components: { DetailList },
 
-  asyncData(context, callback) {
-    // eslint-disable-next-line nuxt/no-timing-in-fetch-data
-    setTimeout(() => {
-      callback(null, {
-        details: [
-          {
-            _id: 1,
-            name: 'Learn English',
-            description:
-              'He had kept Ruth and seven-year-old Loren in good clothes and well fed.',
-            thumbnail:
-              'https://www.eslbuzz.com/wp-content/uploads/2017/11/Kinds-of-Shops.jpg.webp',
-          },
-          {
-            _id: 2,
-            name: 'Learn Chinas',
-            description:
-              'He had kept Ruth and seven-year-old Loren in good clothes and well fed.',
-            thumbnail:
-              'https://www.eslbuzz.com/wp-content/uploads/2017/11/Kinds-of-Shops.jpg.webp',
-          },
-          {
-            _id: 3,
-            name: 'Learn Japan',
-            description:
-              'He had kept Ruth and seven-year-old Loren in good clothes and well fed.',
-            thumbnail:
-              'https://www.eslbuzz.com/wp-content/uploads/2017/11/Kinds-of-Shops.jpg.webp',
-          },
-        ],
-      })
-    }, 1500)
+  // asyncData(context) {
+  //   return (
+  //     new Promise((resolve, reject) => {
+  //       // eslint-disable-next-line nuxt/no-timing-in-fetch-data
+  //       setTimeout(() => {
+  //         resolve({
+  //           details: [
+  //             {
+  //               _id: 1,
+  //               name: 'Learn English',
+  //               description:
+  //                 'He had kept Ruth and seven-year-old Loren in good clothes and well fed.',
+  //               thumbnail:
+  //                 'https://www.eslbuzz.com/wp-content/uploads/2017/11/Kinds-of-Shops.jpg.webp',
+  //             },
+  //             {
+  //               _id: 2,
+  //               name: 'Learn Chinas',
+  //               description:
+  //                 'He had kept Ruth and seven-year-old Loren in good clothes and well fed.',
+  //               thumbnail:
+  //                 'https://www.eslbuzz.com/wp-content/uploads/2017/11/Kinds-of-Shops.jpg.webp',
+  //             },
+  //             {
+  //               _id: 3,
+  //               name: 'Learn Japan',
+  //               description:
+  //                 'He had kept Ruth and seven-year-old Loren in good clothes and well fed.',
+  //               thumbnail:
+  //                 'https://www.eslbuzz.com/wp-content/uploads/2017/11/Kinds-of-Shops.jpg.webp',
+  //             },
+  //           ],
+  //         })
+  //       }, 1500)
+  //     })
+  //       .then((data) => {
+  //         return data
+  //       })
+  //       // eslint-disable-next-line no-console
+  //       .catch((e) => context.error(e))
+  //   )
+  // },
+  // fetch(context) {},
+  // created() {
+  //   this.$store.dispatch('setDetails', this.details)
+  // },
+  computed: {
+    details() {
+      return this.$store.getters.details
+    },
   },
   methods: {
     openModal() {
-      this.$modal.open({ name: 'CreateDetailModal' })
-    },
-    closeModal() {
-      this.$modal.close({ name: 'CreateDetailModal' })
+      this.$modal.open({ name: 'DetailFromModal' })
     },
   },
 }
@@ -145,10 +123,5 @@ export default {
       height: auto;
     }
   }
-}
-
-.modal_body {
-  background-color: #ffffff;
-  padding: 7rem;
 }
 </style>
