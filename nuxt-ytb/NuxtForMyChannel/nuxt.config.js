@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'NuxtForMyChannel',
+    title: 'Learning Languages By Flash Card online',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -17,11 +17,17 @@ export default {
     ],
   },
 
+  loading: {
+    color: '#fff',
+    height: '5px',
+  },
+  // loading: false,
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/css/rhpteam.min.css', '~/assets/css/external.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/modals/v-modal.js'],
+  plugins: ['@/plugins/modals/v-modal.js', '@/plugins/core-component.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -47,7 +53,9 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL:
+      process.env.BASE_API_URL ||
+      'https://nuxt-ytb-default-rtdb.asia-southeast1.firebasedatabase.app',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -62,4 +70,16 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  env: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    baseApiUrl:
+      process.env.BASE_API_URL ||
+      'https://nuxt-ytb-default-rtdb.asia-southeast1.firebasedatabase.app',
+    fbApiKey: 'AIzaSyDourzoFjSuZ7QUSPSOeSuH_q4p-G_dsZU',
+  },
+
+  router: {
+    middleware: 'router-log',
+  },
 }

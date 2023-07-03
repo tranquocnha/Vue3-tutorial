@@ -72,7 +72,6 @@
 </template>
 
 <script>
-import axiox from 'axios'
 import CardList from '@/components/Cards/CardList.vue'
 
 export default {
@@ -81,13 +80,11 @@ export default {
   //   return /^[0-9]$/.test(params.id)
   // },
   asyncData(context) {
-    return axiox
-      .get(
-        `https://nuxt-ytb-default-rtdb.asia-southeast1.firebasedatabase.app/details/${context.params.id}.json`
-      )
-      .then((response) => {
+    return context.app.$axios
+      .$get(`${process.env.baseApiUrl}/details/${context.params.id}.json`)
+      .then((data) => {
         return {
-          detail: response.data,
+          detail: data,
         }
       })
       .catch((e) => {
@@ -95,6 +92,7 @@ export default {
         console.error(e)
       })
   },
+
   data() {
     return {
       cards: [
@@ -129,6 +127,11 @@ export default {
           keyword: 'Road',
         },
       ],
+    }
+  },
+  head() {
+    return {
+      title: `Detail ${this.detail.name} | Learning Languages By Flash Card online`,
     }
   },
   methods: {

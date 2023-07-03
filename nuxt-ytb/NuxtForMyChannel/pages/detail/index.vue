@@ -29,8 +29,6 @@
         >Go to Detail</nuxt-link
       > -->
     </div>
-
-
   </div>
 </template>
 
@@ -38,7 +36,12 @@
 import DetailList from '@/components/Details/DetailList.vue'
 // import { ref } from 'vue'
 export default {
+
   components: { DetailList },
+  middleware: ['check-auth' , 'auth'],
+  head: {
+    title: 'List Details Learning Languages By Flash Card online',
+  },
 
   // asyncData(context) {
   //   return (

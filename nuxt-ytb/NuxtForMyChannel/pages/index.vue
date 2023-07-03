@@ -1,5 +1,6 @@
 <template>
   <div class="ct">
+    <event-alert class="mt_3"/>
     <div class="banner">
       <div class="thumbnail-banner"></div>
     </div>
@@ -19,6 +20,13 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    middleware: 'router-log'
+  }
+</script>
+
 
 <style lang="scss">
 .banner {
